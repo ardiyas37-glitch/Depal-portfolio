@@ -6,9 +6,7 @@ export default function Projects() {
       <div className="page-header">
         <span className="eyebrow">Projects</span>
 
-        <h1>
-          Project yang saya kerjakan
-        </h1>
+        <h1>Project yang saya kerjakan</h1>
 
         <p className="text-muted" style={{ maxWidth: 650 }}>
           Kumpulan project yang pernah saya buat untuk belajar, bereksperimen,
@@ -20,42 +18,63 @@ export default function Projects() {
         <div className="grid grid-3">
           {projects.map((project) => (
             <article key={project.id} className="card project-card">
-              <div className="project-card-top">
+              
+              {/* PROJECT IMAGE */}
+              <div className="project-image">
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={`Preview ${project.name}`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="project-image-placeholder">
+                    <span>PROJECT</span>
+                  </div>
+                )}
+
+                <div className="project-image-overlay">
+                  <span>View Project</span>
+                </div>
+              </div>
+
+              {/* PROJECT CONTENT */}
+              <div className="project-card-content">
                 <span className="eyebrow">PROJECT</span>
-              </div>
 
-              <h2>{project.name}</h2>
+                <h2>{project.name}</h2>
 
-              <p>{project.description}</p>
+                <p>{project.description}</p>
 
-              <div className="project-tech">
-                {project.tech.map((tech) => (
-                  <span key={tech} className="tag">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+                <div className="project-tech">
+                  {project.tech?.map((tech) => (
+                    <span key={tech} className="tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
-              <div className="project-links">
-                {project.github && project.github !== "#" && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    GitHub →
-                  </a>
-                )}
+                <div className="project-links">
+                  {project.github && project.github !== "#" && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      GitHub →
+                    </a>
+                  )}
 
-                {project.demo && project.demo !== "#" && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Lihat Demo →
-                  </a>
-                )}
+                  {project.demo && project.demo !== "#" && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Lihat Demo →
+                    </a>
+                  )}
+                </div>
               </div>
             </article>
           ))}
@@ -67,9 +86,7 @@ export default function Projects() {
           <div>
             <span className="eyebrow">Punya project?</span>
 
-            <h2>
-              Mari buat sesuatu yang menarik bersama.
-            </h2>
+            <h2>Mari buat sesuatu yang menarik bersama.</h2>
 
             <p>
               Terbuka untuk project freelance, kolaborasi, dan kesempatan kerja.

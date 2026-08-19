@@ -8,9 +8,18 @@ export default function Articles() {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const filteredArticles = useMemo(() => {
-    if (activeCategory === "all") return articles;
-    return articles.filter((article) => article.category === activeCategory);
+    if (activeCategory === "all") {
+      return articles;
+    }
+
+    return articles.filter(
+      (article) => article.category === activeCategory
+    );
   }, [articles, activeCategory]);
+
+  function handleCategoryChange(categoryId) {
+    setActiveCategory(categoryId);
+  }
 
   return (
     <div className="container">
@@ -27,15 +36,19 @@ export default function Articles() {
         </p>
       </div>
 
-      <div className="section" style={{ paddingTop: "var(--space-6)" }}>
+      <div
+        className="section"
+        style={{ paddingTop: "var(--space-6)" }}
+      >
         <div className="article-filters">
           <button
+            type="button"
             className={
               activeCategory === "all"
                 ? "filter-chip active"
                 : "filter-chip"
             }
-            onClick={() => setActiveCategory("all")}
+            onClick={() => handleCategoryChange("all")}
           >
             Semua
           </button>
@@ -43,12 +56,15 @@ export default function Articles() {
           {categories.map((category) => (
             <button
               key={category.id}
+              type="button"
               className={
                 activeCategory === category.id
                   ? "filter-chip active"
                   : "filter-chip"
               }
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() =>
+                handleCategoryChange(category.id)
+              }
             >
               {category.name}
             </button>
@@ -64,7 +80,10 @@ export default function Articles() {
         ) : (
           <div className="grid grid-3">
             {filteredArticles.map((article) => (
-              <ArticleCard key={article.id} article={article} />
+              <ArticleCard
+                key={article.id}
+                article={article}
+              />
             ))}
           </div>
         )}

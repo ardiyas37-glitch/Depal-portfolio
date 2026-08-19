@@ -10,11 +10,15 @@ const INITIAL_FORM = {
 
 export default function Contact() {
   const [form, setForm] = useState(INITIAL_FORM);
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle");
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value
+    }));
   }
 
   async function handleSubmit(event) {
@@ -23,28 +27,43 @@ export default function Contact() {
 
     try {
       await submitContactMessage(form);
+
       setStatus("sent");
       setForm(INITIAL_FORM);
-    } catch {
+    } catch (error) {
+      console.error("Gagal mengirim pesan:", error);
       setStatus("error");
     }
   }
 
   return (
     <div className="container">
+      {/* =========================
+          HEADER
+      ========================= */}
       <div className="page-header">
         <span className="eyebrow">Kontak</span>
 
         <h1>Mari membangun sesuatu bersama</h1>
 
-        <p className="text-muted" style={{ maxWidth: 560 }}>
+        <p
+          className="text-muted"
+          style={{ maxWidth: 560 }}
+        >
           Punya proyek, pekerjaan, atau ide yang ingin diwujudkan?
           Kirim pesan dan saya akan segera menghubungi Anda.
         </p>
       </div>
 
       <div className="section contact-grid grid grid-2">
-        <form className="contact-form" onSubmit={handleSubmit}>
+
+        {/* =========================
+            FORM
+        ========================= */}
+        <form
+          className="contact-form"
+          onSubmit={handleSubmit}
+        >
           <label className="form-field">
             <span>Nama</span>
 
@@ -53,6 +72,7 @@ export default function Contact() {
               name="name"
               value={form.name}
               onChange={handleChange}
+              placeholder="Nama kamu"
               required
             />
           </label>
@@ -65,6 +85,7 @@ export default function Contact() {
               name="email"
               value={form.email}
               onChange={handleChange}
+              placeholder="nama@email.com"
               required
             />
           </label>
@@ -77,6 +98,7 @@ export default function Contact() {
               name="subject"
               value={form.subject}
               onChange={handleChange}
+              placeholder="Tentang apa yang ingin dibicarakan?"
               required
             />
           </label>
@@ -89,6 +111,7 @@ export default function Contact() {
               rows="6"
               value={form.message}
               onChange={handleChange}
+              placeholder="Ceritakan proyek atau ide kamu..."
               required
             />
           </label>
@@ -98,59 +121,106 @@ export default function Contact() {
             className="btn btn-primary"
             disabled={status === "sending"}
           >
-            {status === "sending" ? "Mengirim..." : "Kirim Pesan"}
+            {status === "sending"
+              ? "Mengirim..."
+              : "Kirim Pesan"}
           </button>
 
           {status === "sent" && (
             <p className="form-status success">
-              Pesan berhasil dikirim. Terima kasih sudah menghubungi saya —
-              saya akan segera membalas.
+              Pesan berhasil dikirim. Terima kasih sudah
+              menghubungi saya.
             </p>
           )}
 
           {status === "error" && (
             <p className="form-status error">
-              Terjadi kesalahan. Silakan coba lagi beberapa saat lagi.
+              Terjadi kesalahan saat mengirim pesan.
+              Silakan coba lagi.
             </p>
           )}
         </form>
 
+
+        {/* =========================
+            KONTAK SAMPING
+        ========================= */}
         <div className="contact-side">
-          <h2>Cara lain untuk menghubungi saya</h2>
 
-          <ul className="contact-links">
-            <li>
-              <span className="footer-col-title">GitHub</span>
+          <span className="eyebrow">
+            Mari Terhubung
+          </span>
 
-              <a
-                href="https://github.com/depal"
-                target="_blank"
-                rel="noreferrer"
-              >
-                github.com/depal
-              </a>
-            </li>
+          <h2>
+            Temukan saya di internet
+          </h2>
 
-            <li>
-              <span className="footer-col-title">LinkedIn</span>
+          <p className="text-muted">
+            Untuk melihat project atau menghubungi saya
+            secara langsung, kamu bisa menggunakan salah
+            satu kontak berikut.
+          </p>
 
-              <a
-                href="https://linkedin.com/in/depal"
-                target="_blank"
-                rel="noreferrer"
-              >
-                linkedin.com/in/depal
-              </a>
-            </li>
 
-            <li>
-              <span className="footer-col-title">Email</span>
+          {/* GitHub */}
+          <a
+            href="https://github.com/ardiyas37-glitch"
+            target="_blank"
+            rel="noreferrer"
+            className="contact-social"
+          >
+            <div className="contact-social-icon">
+              GH
+            </div>
 
-              <a href="mailto:hello@depal.dev">
-                hello@depal.dev
-              </a>
-            </li>
-          </ul>
+            <div className="contact-social-content">
+              <span className="contact-social-label">
+                GitHub
+              </span>
+
+              <strong>
+                @ardiyas37-glitch
+              </strong>
+
+              <small>
+                Lihat project dan source code
+              </small>
+            </div>
+
+            <span className="contact-social-arrow">
+              →
+            </span>
+          </a>
+
+
+          {/* Email */}
+          <a
+            href="mailto:ghdepalar@gmail.com"
+            className="contact-social"
+          >
+            <div className="contact-social-icon">
+              @
+            </div>
+
+            <div className="contact-social-content">
+              <span className="contact-social-label">
+                Email
+              </span>
+
+              <strong>
+                ghdepalar@gmail.com
+              </strong>
+
+              <small>
+                Kirim pesan secara langsung
+              </small>
+            </div>
+
+            <span className="contact-social-arrow">
+              →
+            </span>
+          </a>
+
         </div>
       </div>
     </div>

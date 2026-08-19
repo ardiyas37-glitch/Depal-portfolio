@@ -10,15 +10,22 @@ import Categories from "./pages/Categories";
 import CategoryDetail from "./pages/CategoryDetail";
 import Search from "./pages/Search";
 import Contact from "./pages/Contact";
+import ScrollToTop from "./components/ScrollToTop";
 
 import { BlogProvider } from "./context/BlogContext";
 
 export default function App() {
   return (
     <BlogProvider>
+      {/* Reset scroll setiap kali pindah halaman */}
+      <ScrollToTop />
+
       <Routes>
         <Route element={<MainLayout />}>
+          {/* Home */}
           <Route path="/" element={<Home />} />
+
+          {/* About */}
           <Route path="/about" element={<About />} />
 
           {/* Projects */}
@@ -48,7 +55,10 @@ export default function App() {
 
 function NotFound() {
   return (
-    <div className="container state-msg" style={{ padding: "96px 0" }}>
+    <div
+      className="container state-msg"
+      style={{ padding: "96px 0" }}
+    >
       <span className="eyebrow">404</span>
 
       <h2>Halaman tidak ditemukan</h2>
