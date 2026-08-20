@@ -1,0 +1,569 @@
+/* =========================================================
+   DEPAL PORTFOLIO
+   CERTIFICATES — GLOBAL DESIGN SYSTEM
+   ========================================================= */
+
+.certificates-page {
+  min-height: 100vh;
+  padding: var(--space-9) 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.certificates-intro {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto var(--space-8);
+  padding: 0 var(--space-5);
+  animation: fadeUp 0.7s var(--ease-out) both;
+}
+
+.certificates-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--color-accent);
+}
+
+.certificates-eyebrow::before {
+  content: "";
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.certificates-intro h1 {
+  max-width: 900px;
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(
+    var(--fs-3xl),
+    7vw,
+    var(--fs-4xl)
+  );
+
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+
+  color: var(--color-ink);
+}
+
+.certificates-intro p {
+  max-width: 560px;
+  margin: var(--space-5) 0 0;
+
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.75;
+
+  color: var(--color-muted);
+}
+
+/* =========================================================
+   CERTIFICATE SECTION
+   ========================================================= */
+
+.certificates-list {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+.certificates-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-5);
+
+  border-bottom: 1px solid var(--color-border);
+
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--color-faint);
+}
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    2,
+    minmax(0, 1fr)
+  );
+  gap: var(--space-5);
+}
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.certificate-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-sm);
+
+  animation: cardReveal 0.6s var(--ease-out) both;
+
+  transition:
+    transform var(--dur-med) var(--ease),
+    box-shadow var(--dur-med) var(--ease),
+    border-color var(--dur-med) var(--ease);
+}
+
+.certificate-card:hover {
+  transform: translateY(-6px);
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.certificate-image {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  aspect-ratio: 16 / 10;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-accent-tint),
+      var(--color-bg)
+    );
+}
+
+.certificate-image::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.04),
+      rgba(18, 21, 28, 0.04)
+    );
+}
+
+.certificate-image img {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  padding: var(--space-3);
+
+  transition:
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.certificate-card:hover
+.certificate-image img {
+  transform: scale(1.025);
+}
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.certificate-card::before {
+  content: attr(data-number);
+
+  position: absolute;
+  z-index: 5;
+
+  top: var(--space-3);
+  left: var(--space-3);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  backdrop-filter: blur(10px);
+
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+
+  color: var(--color-ink);
+
+  box-shadow: var(--shadow-sm);
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.certificate-content {
+  padding: var(--space-5);
+}
+
+.certificate-type {
+  display: inline-flex;
+
+  margin-bottom: var(--space-3);
+
+  padding: var(--space-1) var(--space-3);
+
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+
+  background: var(--color-bg);
+
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  color: var(--color-muted);
+}
+
+.certificate-content h2 {
+  max-width: 620px;
+
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+
+  color: var(--color-ink);
+
+  transition:
+    color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.certificate-card:hover
+.certificate-content h2 {
+  color: var(--color-accent);
+  transform: translateX(2px);
+}
+
+.certificate-description {
+  max-width: 600px;
+
+  margin: var(--space-3) 0 0;
+
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+
+  color: var(--color-muted);
+}
+
+/* =========================================================
+   META
+   ========================================================= */
+
+.certificate-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: var(--space-4);
+
+  margin-top: var(--space-5);
+  padding-top: var(--space-3);
+
+  border-top: 1px solid var(--color-border);
+
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+
+  color: var(--color-faint);
+}
+
+.certificate-meta span:first-child {
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.certificate-meta span:last-child {
+  white-space: nowrap;
+}
+
+/* =========================================================
+   LARGE CARD — FIRST CERTIFICATE
+   ========================================================= */
+
+.certificate-card:first-child {
+  grid-column: 1 / -1;
+
+  display: grid;
+
+  grid-template-columns:
+    1.25fr
+    0.75fr;
+}
+
+.certificate-card:first-child
+.certificate-image {
+  height: 100%;
+  min-height: 330px;
+
+  aspect-ratio: auto;
+}
+
+.certificate-card:first-child
+.certificate-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: var(--space-7);
+}
+
+.certificate-card:first-child
+.certificate-content h2 {
+  font-size: clamp(
+    var(--fs-xl),
+    3vw,
+    var(--fs-2xl)
+  );
+}
+
+.certificate-card:first-child
+.certificate-description {
+  font-size: var(--fs-base);
+}
+
+/* =========================================================
+   STAGGER ANIMATION
+   ========================================================= */
+
+.certificate-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.certificate-card:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.certificate-card:nth-child(3) {
+  animation-delay: 0.19s;
+}
+
+.certificate-card:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+.certificate-card:nth-child(5) {
+  animation-delay: 0.33s;
+}
+
+.certificate-card:nth-child(6) {
+  animation-delay: 0.40s;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .certificates-page {
+    padding: var(--space-8) 0;
+  }
+
+  .certificates-intro {
+    margin-bottom: var(--space-7);
+  }
+
+  .certificates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-card:first-child {
+    grid-column: auto;
+    display: block;
+  }
+
+  .certificate-card:first-child
+  .certificate-image {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .certificate-card:first-child
+  .certificate-content {
+    padding: var(--space-5);
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .certificates-page {
+    padding: var(--space-7) 0;
+  }
+
+  .certificates-intro,
+  .certificates-list {
+    width: 100%;
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .certificates-intro {
+    margin-bottom: var(--space-6);
+  }
+
+  .certificates-intro h1 {
+    font-size: var(--fs-3xl);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .certificates-intro p {
+    margin-top: var(--space-4);
+    font-size: var(--fs-sm);
+  }
+
+  .certificates-list-header {
+    margin-bottom: var(--space-4);
+  }
+
+  .certificates-grid {
+    gap: var(--space-4);
+  }
+
+  .certificate-card {
+    border-radius: var(--radius-md);
+  }
+
+  .certificate-image img {
+    padding: var(--space-3);
+  }
+
+  .certificate-content,
+  .certificate-card:first-child
+  .certificate-content {
+    padding: var(--space-4);
+  }
+
+  .certificate-content h2,
+  .certificate-card:first-child
+  .certificate-content h2 {
+    font-size: var(--fs-lg);
+  }
+
+  .certificate-description {
+    font-size: var(--fs-sm);
+  }
+
+  .certificate-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .certificate-meta span:last-child {
+    white-space: normal;
+  }
+}
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .certificates-intro h1 {
+    font-size: var(--fs-2xl);
+  }
+
+  .certificates-intro p {
+    font-size: var(--fs-sm);
+  }
+
+  .certificate-card::before {
+    width: 32px;
+    height: 32px;
+    font-size: 0.65rem;
+  }
+
+  .certificate-type {
+    font-size: 0.68rem;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .certificate-card,
+  .certificate-image img,
+  .certificate-content h2 {
+    animation: none !important;
+    transition: none !important;
+  }
+}

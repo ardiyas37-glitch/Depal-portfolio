@@ -6,9 +6,10 @@ const NAV_ITEMS = [
   { label: "Beranda", to: "/" },
   { label: "Tentang Saya", to: "/about" },
   { label: "Project", to: "/projects" },
+  { label: "Sertifikat", to: "/certificates" },
   { label: "Artikel", to: "/articles" },
   { label: "Kategori", to: "/categories" },
-  { label: "Kontak", to: "/contact" }
+  { label: "Kontak", to: "/contact" },
 ];
 
 export default function Navbar() {
@@ -29,9 +30,16 @@ export default function Navbar() {
           Depal<span className="dot">.</span>
         </NavLink>
 
-        <nav className="navbar-links" aria-label="Navigasi utama">
+        <nav
+          className="navbar-links"
+          aria-label="Navigasi utama"
+        >
           {NAV_ITEMS.map((item) => (
-            <NavLink key={item.to} to={item.to} className={linkClass}>
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={linkClass}
+            >
               {item.label}
             </NavLink>
           ))}
@@ -44,7 +52,11 @@ export default function Navbar() {
 
           <button
             type="button"
-            className={isOpen ? "navbar-toggle open" : "navbar-toggle"}
+            className={
+              isOpen
+                ? "navbar-toggle open"
+                : "navbar-toggle"
+            }
             aria-label="Buka menu"
             aria-expanded={isOpen}
             onClick={() => setIsOpen((prev) => !prev)}

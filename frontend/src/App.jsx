@@ -4,6 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
+import Certificates from "./pages/Certificates";
 import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import Categories from "./pages/Categories";
@@ -17,11 +18,11 @@ import { BlogProvider } from "./context/BlogContext";
 export default function App() {
   return (
     <BlogProvider>
-      {/* Reset scroll setiap kali pindah halaman */}
       <ScrollToTop />
 
       <Routes>
         <Route element={<MainLayout />}>
+
           {/* Home */}
           <Route path="/" element={<Home />} />
 
@@ -31,22 +32,48 @@ export default function App() {
           {/* Projects */}
           <Route path="/projects" element={<Projects />} />
 
+          {/* Certificates */}
+          <Route
+            path="/certificates"
+            element={<Certificates />}
+          />
+
           {/* Articles */}
           <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/:slug" element={<ArticleDetail />} />
+          <Route
+            path="/articles/:slug"
+            element={<ArticleDetail />}
+          />
 
           {/* Categories */}
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/categories/:slug" element={<CategoryDetail />} />
+          <Route
+            path="/categories"
+            element={<Categories />}
+          />
+
+          <Route
+            path="/categories/:slug"
+            element={<CategoryDetail />}
+          />
 
           {/* Search */}
-          <Route path="/search" element={<Search />} />
+          <Route
+            path="/search"
+            element={<Search />}
+          />
 
           {/* Contact */}
-          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
 
           {/* 404 */}
-          <Route path="*" element={<NotFound />} />
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
+
         </Route>
       </Routes>
     </BlogProvider>
