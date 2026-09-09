@@ -1,0 +1,8 @@
+name = "depal-portfolio"
+compatibility_date = "2026-09-09"
+
+# Workers Static Assets — serve hasil build Vite dari frontend/dist
+# Tanpa Worker script (assets-only). Ini menggantikan Worker bawaan.
+[assets]
+directory = "./frontend/dist"
+not_found_handling = "single-page-application"
