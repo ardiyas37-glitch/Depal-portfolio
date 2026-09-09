@@ -5,4 +5,3 @@ compatibility_date = "2026-09-09"
 # Tanpa Worker script (assets-only). Ini menggantikan Worker bawaan.
 [assets]
 directory = "./frontend/dist"
-not_found_handling = "single-page-application"
