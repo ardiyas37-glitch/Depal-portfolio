@@ -1,4 +1,5 @@
 import projects from "../data/projects";
+import Reveal from "../components/Reveal";
 
 export default function Projects() {
   return (
@@ -8,31 +9,35 @@ export default function Projects() {
           PROJECTS
       ========================= */}
 
-      <div className="page-header">
-        <span className="eyebrow">
+      <Reveal className="page-header" y={16}>
+        <span className="eyebrow hero-stagger-1">
           Projects
         </span>
 
-        <h1>
+        <h1 className="hero-stagger-2">
           Project yang saya kerjakan
         </h1>
 
         <p
-          className="text-muted"
+          className="text-muted hero-stagger-3"
           style={{ maxWidth: 650 }}
         >
           Kumpulan project yang pernah saya buat untuk
           belajar, bereksperimen, dan membangun solusi
           web yang bermanfaat.
         </p>
-      </div>
+      </Reveal>
 
       <section className="section">
         <div className="grid grid-3">
 
-          {projects.map((project) => (
-            <article
+          {projects.map((project, i) => (
+            <Reveal
               key={project.id}
+              as="article"
+              delay={i * 100}
+              y={30}
+              threshold={0.12}
               className="card project-card"
             >
 
@@ -117,7 +122,7 @@ export default function Projects() {
 
               </div>
 
-            </article>
+            </Reveal>
           ))}
 
         </div>
@@ -125,10 +130,10 @@ export default function Projects() {
 
 
       {/* =========================
-          CONTACT CTA
-      ========================= */}
+           CONTACT CTA
+       ========================= */}
 
-      <section className="section contact-cta">
+      <Reveal as="section" className="section contact-cta">
 
         <div className="container contact-cta-inner">
 
@@ -152,7 +157,7 @@ export default function Projects() {
 
         </div>
 
-      </section>
+      </Reveal>
 
     </div>
   );

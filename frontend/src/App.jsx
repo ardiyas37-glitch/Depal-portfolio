@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 
 import Home from "./pages/Home";
@@ -15,6 +16,26 @@ import ScrollToTop from "./components/ScrollToTop";
 
 import { BlogProvider } from "./context/BlogContext";
 
+function PageTransition({ children }) {
+  const location = useLocation();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(false);
+    const timer = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(timer);
+  }, [location.pathname]);
+
+  return (
+    <div
+      className={visible ? "page-fade-in" : "page-fade-in page-fade-in-hidden"}
+      style={{ minHeight: "100vh" }}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <BlogProvider>
@@ -22,58 +43,72 @@ export default function App() {
 
       <Routes>
         <Route element={<MainLayout />}>
-
-          {/* Home */}
-          <Route path="/" element={<Home />} />
-
-          {/* About */}
-          <Route path="/about" element={<About />} />
-
-          {/* Projects */}
-          <Route path="/projects" element={<Projects />} />
-
-          {/* Certificates */}
+          <Route
+            path="/"
+            element={
+              <PageTransition><Home /></PageTransition>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <PageTransition><About /></PageTransition>
+            }
+          />
+          <Route
+            path="/projects"
+            element={
+              <PageTransition><Projects /></PageTransition>
+            }
+          />
           <Route
             path="/certificates"
-            element={<Certificates />}
+            element={
+              <PageTransition><Certificates /></PageTransition>
+            }
           />
-
-          {/* Articles */}
-          <Route path="/articles" element={<Articles />} />
+          <Route
+            path="/articles"
+            element={
+              <PageTransition><Articles /></PageTransition>
+            }
+          />
           <Route
             path="/articles/:slug"
-            element={<ArticleDetail />}
+            element={
+              <PageTransition><ArticleDetail /></PageTransition>
+            }
           />
-
-          {/* Categories */}
           <Route
             path="/categories"
-            element={<Categories />}
+            element={
+              <PageTransition><Categories /></PageTransition>
+            }
           />
-
           <Route
             path="/categories/:slug"
-            element={<CategoryDetail />}
+            element={
+              <PageTransition><CategoryDetail /></PageTransition>
+            }
           />
-
-          {/* Search */}
           <Route
             path="/search"
-            element={<Search />}
+            element={
+              <PageTransition><Search /></PageTransition>
+            }
           />
-
-          {/* Contact */}
           <Route
             path="/contact"
-            element={<Contact />}
+            element={
+              <PageTransition><Contact /></PageTransition>
+            }
           />
-
-          {/* 404 */}
           <Route
             path="*"
-            element={<NotFound />}
+            element={
+              <PageTransition><NotFound /></PageTransition>
+            }
           />
-
         </Route>
       </Routes>
     </BlogProvider>

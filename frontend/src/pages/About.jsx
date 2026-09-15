@@ -1,3 +1,5 @@
+import Reveal from "../components/Reveal";
+
 export default function About() {
   const skills = [
     "JavaScript",
@@ -46,7 +48,7 @@ export default function About() {
       <section className="section about-hero">
         <div className="container">
 
-          <span className="eyebrow">
+          <span className="eyebrow hero-stagger-1">
             Tentang Saya
           </span>
 
@@ -54,34 +56,34 @@ export default function About() {
 
             <div className="about-hero-copy">
 
-              <h1>
+              <h1 className="hero-stagger-2">
                 Halo, saya <span>Depal.</span>
               </h1>
 
-              <p className="about-lead">
+              <p className="about-lead hero-stagger-3">
                 Full-Stack Developer yang memiliki ketertarikan
                 pada pengembangan website, aplikasi web modern,
                 dan software engineering.
               </p>
 
-              <p>
+              <p className="hero-stagger-3">
                 Saya senang mempelajari bagaimana sebuah aplikasi
                 dibangun dari frontend hingga backend — mulai dari
                 membuat antarmuka, mengembangkan API, sampai
                 mengelola database.
               </p>
 
-              <div className="about-actions">
+              <div className="about-actions hero-stagger-4">
                 <a
                   href="/projects"
-                  className="button"
+                  className="btn btn-primary"
                 >
                   Lihat Project →
                 </a>
 
                 <a
                   href="/contact"
-                  className="button button-secondary"
+                  className="btn btn-secondary"
                 >
                   Hubungi Saya
                 </a>
@@ -90,12 +92,12 @@ export default function About() {
             </div>
 
 
-            <div className="about-profile-card">
+            <div className="about-profile-card hero-visual-enter">
 
               <div className="about-profile-image">
 
                 <img
-                  src="/image/profile.jpg"
+                  src="/images/profile.png"
                   alt="Foto profil Depal"
                 />
 
@@ -126,11 +128,11 @@ export default function About() {
       {/* =========================
           PROFIL SINGKAT
       ========================= */}
-      <section className="section about-introduction">
+      <Reveal as="section" className="section about-introduction">
 
         <div className="container">
 
-          <div className="about-section-heading">
+          <Reveal className="about-section-heading">
 
             <span className="eyebrow">
               Profil
@@ -140,12 +142,12 @@ export default function About() {
               Belajar, membangun, dan terus berkembang.
             </h2>
 
-          </div>
+          </Reveal>
 
 
           <div className="about-introduction-grid">
 
-            <div>
+            <Reveal delay={0}>
 
               <p>
                 Saya adalah seorang developer yang memiliki
@@ -160,9 +162,9 @@ export default function About() {
                 pengembangan website secara mandiri.
               </p>
 
-            </div>
+            </Reveal>
 
-            <div>
+            <Reveal delay={120}>
 
               <p>
                 Saya terus mengembangkan kemampuan melalui
@@ -177,22 +179,22 @@ export default function About() {
                 hingga deployment.
               </p>
 
-            </div>
+            </Reveal>
 
           </div>
 
         </div>
-      </section>
+      </Reveal>
 
 
       {/* =========================
           FOKUS
       ========================= */}
-      <section className="section about-focus">
+      <Reveal as="section" className="section about-focus">
 
         <div className="container">
 
-          <div className="about-section-heading">
+          <Reveal className="about-section-heading">
 
             <span className="eyebrow">
               Yang Saya Kerjakan
@@ -202,15 +204,17 @@ export default function About() {
               Fokus dalam pengembangan software.
             </h2>
 
-          </div>
+          </Reveal>
 
 
           <div className="grid grid-2 about-focus-grid">
 
             {focus.map((item, index) => (
 
-              <article
+              <Reveal
                 key={item.title}
+                as="article"
+                delay={index * 90}
                 className="card about-focus-card"
               >
 
@@ -226,24 +230,24 @@ export default function About() {
                   {item.description}
                 </p>
 
-              </article>
+              </Reveal>
 
             ))}
 
           </div>
 
         </div>
-      </section>
+      </Reveal>
 
 
       {/* =========================
           TEKNOLOGI
       ========================= */}
-      <section className="section about-skills">
+      <Reveal as="section" className="section about-skills">
 
         <div className="container">
 
-          <div className="about-section-heading">
+          <Reveal className="about-section-heading">
 
             <span className="eyebrow">
               Teknologi
@@ -258,39 +262,42 @@ export default function About() {
               dalam berbagai project.
             </p>
 
-          </div>
+          </Reveal>
 
 
           <div className="about-skills-list">
 
             {skills.map((skill, index) => (
 
-              <span
+              <Reveal
                 key={skill}
+                as="span"
+                delay={index * 35}
+                y={10}
                 className="about-skill-tag"
                 style={{
                   "--skill-index": index
                 }}
               >
                 {skill}
-              </span>
+              </Reveal>
 
             ))}
 
           </div>
 
         </div>
-      </section>
+      </Reveal>
 
 
       {/* =========================
           PENDIDIKAN
       ========================= */}
-      <section className="section about-education">
+      <Reveal as="section" className="section about-education">
 
         <div className="container">
 
-          <div className="about-section-heading">
+          <Reveal className="about-section-heading">
 
             <span className="eyebrow">
               Pendidikan
@@ -300,12 +307,12 @@ export default function About() {
               Latar belakang pendidikan.
             </h2>
 
-          </div>
+          </Reveal>
 
 
           <div className="about-timeline">
 
-            <article className="about-timeline-item">
+            <Reveal as="article" className="about-timeline-item" delay={0}>
 
               <span className="about-timeline-period">
                 Pendidikan Menengah Pertama
@@ -322,10 +329,10 @@ export default function About() {
                 saya selanjutnya.
               </p>
 
-            </article>
+            </Reveal>
 
 
-            <article className="about-timeline-item">
+            <Reveal as="article" className="about-timeline-item" delay={120}>
 
               <span className="about-timeline-period">
                 Pendidikan Menengah Kejuruan
@@ -344,22 +351,22 @@ export default function About() {
                 Miftahul Ihsan Cilograng dengan jurusan Perhotelan.
               </p>
 
-            </article>
+            </Reveal>
 
           </div>
 
         </div>
-      </section>
+      </Reveal>
 
 
       {/* =========================
           PERJALANAN
       ========================= */}
-      <section className="section about-journey">
+      <Reveal as="section" className="section about-journey">
 
         <div className="container">
 
-          <div className="about-section-heading">
+          <Reveal className="about-section-heading">
 
             <span className="eyebrow">
               Perjalanan
@@ -369,12 +376,12 @@ export default function About() {
               Dari rasa ingin tahu menjadi kemampuan.
             </h2>
 
-          </div>
+          </Reveal>
 
 
           <div className="about-timeline">
 
-            <article className="about-timeline-item">
+            <Reveal as="article" className="about-timeline-item" delay={0}>
 
               <span className="about-timeline-period">
                 Pengembangan Software
@@ -395,10 +402,10 @@ export default function About() {
                 PostgreSQL, dan REST API.
               </p>
 
-            </article>
+            </Reveal>
 
 
-            <article className="about-timeline-item">
+            <Reveal as="article" className="about-timeline-item" delay={120}>
 
               <span className="about-timeline-period">
                 Pengembangan Web
@@ -419,18 +426,18 @@ export default function About() {
                 menggunakan Git dan berbagai tools development.
               </p>
 
-            </article>
+            </Reveal>
 
           </div>
 
         </div>
-      </section>
+      </Reveal>
 
 
       {/* =========================
           CTA
       ========================= */}
-      <section className="section contact-cta about-contact">
+      <Reveal as="section" className="section contact-cta about-contact">
 
         <div className="container contact-cta-inner">
 
@@ -453,14 +460,14 @@ export default function About() {
 
           <a
             href="/contact"
-            className="button"
+            className="btn btn-primary"
           >
             Hubungi Saya
           </a>
 
         </div>
 
-      </section>
+      </Reveal>
 
     </div>
   );

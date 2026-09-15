@@ -11,9 +11,10 @@ export default function Button({
   onClick,
   type = "button",
   variant = "primary",
+  pulse = false,
   ...rest
 }) {
-  const className = `btn btn-${variant}`;
+  const className = `btn btn-${variant}${pulse ? " pulse-glow" : ""}`;
 
   if (to) {
     return (

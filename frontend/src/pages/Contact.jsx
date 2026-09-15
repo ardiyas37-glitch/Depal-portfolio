@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { submitContactMessage } from "../services/api";
+import Reveal from "../components/Reveal";
 
 const INITIAL_FORM = {
   name: "",
   email: "",
   subject: "",
-  message: ""
+  message: "",
 };
 
 export default function Contact() {
@@ -14,20 +15,17 @@ export default function Contact() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-
     setForm((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
     setStatus("sending");
-
     try {
       await submitContactMessage(form);
-
       setStatus("sent");
       setForm(INITIAL_FORM);
     } catch (error) {
@@ -38,35 +36,19 @@ export default function Contact() {
 
   return (
     <div className="container">
-      {/* =========================
-          HEADER
-      ========================= */}
-      <div className="page-header">
-        <span className="eyebrow">Kontak</span>
-
-        <h1>Mari membangun sesuatu bersama</h1>
-
-        <p
-          className="text-muted"
-          style={{ maxWidth: 560 }}
-        >
-          Punya proyek, pekerjaan, atau ide yang ingin diwujudkan?
-          Kirim pesan dan saya akan segera menghubungi Anda.
+      <Reveal className="page-header" y={16}>
+        <span className="eyebrow hero-stagger-1">Kontak</span>
+        <h1 className="hero-stagger-2">Mari membangun sesuatu bersama</h1>
+        <p className="text-muted hero-stagger-3" style={{ maxWidth: 560 }}>
+          Punya proyek, pekerjaan, atau ide yang ingin diwujudkan? Kirim pesan dan saya akan segera
+          menghubungi Anda.
         </p>
-      </div>
+      </Reveal>
 
       <div className="section contact-grid grid grid-2">
-
-        {/* =========================
-            FORM
-        ========================= */}
-        <form
-          className="contact-form"
-          onSubmit={handleSubmit}
-        >
+        <Reveal as="form" className="contact-form" onSubmit={handleSubmit} y={18}>
           <label className="form-field">
             <span>Nama</span>
-
             <input
               type="text"
               name="name"
@@ -79,7 +61,6 @@ export default function Contact() {
 
           <label className="form-field">
             <span>Email</span>
-
             <input
               type="email"
               name="email"
@@ -92,7 +73,6 @@ export default function Contact() {
 
           <label className="form-field">
             <span>Subjek</span>
-
             <input
               type="text"
               name="subject"
@@ -105,7 +85,6 @@ export default function Contact() {
 
           <label className="form-field">
             <span>Pesan</span>
-
             <textarea
               name="message"
               rows="6"
@@ -116,112 +95,56 @@ export default function Contact() {
             />
           </label>
 
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={status === "sending"}
-          >
-            {status === "sending"
-              ? "Mengirim..."
-              : "Kirim Pesan"}
+          <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
+            {status === "sending" ? "Mengirim..." : "Kirim Pesan"}
           </button>
 
           {status === "sent" && (
             <p className="form-status success">
-              Pesan berhasil dikirim. Terima kasih sudah
-              menghubungi saya.
+              Pesan berhasil dikirim. Terima kasih sudah menghubungi saya.
             </p>
           )}
 
           {status === "error" && (
             <p className="form-status error">
-              Terjadi kesalahan saat mengirim pesan.
-              Silakan coba lagi.
+              Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.
             </p>
           )}
-        </form>
+        </Reveal>
 
-
-        {/* =========================
-            KONTAK SAMPING
-        ========================= */}
-        <div className="contact-side">
-
-          <span className="eyebrow">
-            Mari Terhubung
-          </span>
-
-          <h2>
-            Temukan saya di internet
-          </h2>
-
+        <Reveal className="contact-side" delay={120} y={18}>
+          <span className="eyebrow">Mari Terhubung</span>
+          <h2>Temukan saya di internet</h2>
           <p className="text-muted">
-            Untuk melihat project atau menghubungi saya
-            secara langsung, kamu bisa menggunakan salah
+            Untuk melihat project atau menghubungi saya secara langsung, kamu bisa menggunakan salah
             satu kontak berikut.
           </p>
 
-
-          {/* GitHub */}
           <a
             href="https://github.com/ardiyas37-glitch"
             target="_blank"
             rel="noreferrer"
             className="contact-social"
           >
-            <div className="contact-social-icon">
-              GH
-            </div>
-
+            <div className="contact-social-icon">GH</div>
             <div className="contact-social-content">
-              <span className="contact-social-label">
-                GitHub
-              </span>
-
-              <strong>
-                @ardiyas37-glitch
-              </strong>
-
-              <small>
-                Lihat project dan source code
-              </small>
+              <span className="contact-social-label">GitHub</span>
+              <strong>@ardiyas37-glitch</strong>
+              <small>Lihat project dan source code</small>
             </div>
-
-            <span className="contact-social-arrow">
-              →
-            </span>
+            <span className="contact-social-arrow">→</span>
           </a>
 
-
-          {/* Email */}
-          <a
-            href="mailto:ghdepalar@gmail.com"
-            className="contact-social"
-          >
-            <div className="contact-social-icon">
-              @
-            </div>
-
+          <a href="mailto:ghdepalar@gmail.com" className="contact-social">
+            <div className="contact-social-icon">@</div>
             <div className="contact-social-content">
-              <span className="contact-social-label">
-                Email
-              </span>
-
-              <strong>
-                ghdepalar@gmail.com
-              </strong>
-
-              <small>
-                Kirim pesan secara langsung
-              </small>
+              <span className="contact-social-label">Email</span>
+              <strong>ghdepalar@gmail.com</strong>
+              <small>Kirim pesan secara langsung</small>
             </div>
-
-            <span className="contact-social-arrow">
-              →
-            </span>
+            <span className="contact-social-arrow">→</span>
           </a>
-
-        </div>
+        </Reveal>
       </div>
     </div>
   );

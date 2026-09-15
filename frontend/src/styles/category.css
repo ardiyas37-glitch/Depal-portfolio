@@ -8,14 +8,16 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-md);
-  background: var(--color-accent-tint);
-  color: var(--color-accent-dark);
+  background: linear-gradient(135deg, rgba(58,107,255,0.18), rgba(34,211,238,0.14));
+  border: 1px solid rgba(58,107,255,0.18);
+  color: #a8bbff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
   font-weight: 600;
   margin-bottom: var(--space-4);
+  box-shadow: 0 4px 14px rgba(58,107,255,0.14);
 }
 
 .category-card h3 {

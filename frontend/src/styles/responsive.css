@@ -38,18 +38,6 @@
     grid-template-columns: 1fr;
   }
 
-  .navbar-links {
-    display: none;
-  }
-
-  .navbar-cta .btn-secondary {
-    display: none;
-  }
-
-  .navbar-toggle {
-    display: flex;
-  }
-
   .section-head {
     flex-direction: column;
     align-items: flex-start;

@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import Button from "../components/Button";
 import ArticleCard from "../components/ArticleCard";
 import Loading from "../components/Loading";
+import Reveal from "../components/Reveal";
 import { useBlog } from "../context/BlogContext";
-import projects from "../data/projects";
 
 const SKILLS = {
   Frontend: [
@@ -129,11 +129,11 @@ export default function Home() {
 
           <div className="hero-copy home-hero-copy">
 
-            <span className="eyebrow home-eyebrow">
+            <span className="eyebrow home-eyebrow hero-stagger-1">
               Software Engineer · Full-Stack Developer
             </span>
 
-            <h1 className="home-hero-title">
+            <h1 className="home-hero-title hero-stagger-2">
               Membangun aplikasi web yang{" "}
               <span className="hero-highlight home-highlight">
                 rapi, cepat,
@@ -141,14 +141,14 @@ export default function Home() {
               dan siap berkembang.
             </h1>
 
-            <p className="hero-lede home-hero-lede">
+            <p className="hero-lede home-hero-lede hero-stagger-3">
               Saya Depal, seorang full-stack developer yang berfokus pada
               pengembangan web modern — mengubah ide menjadi produk yang andal,
               mudah dirawat, dan dikembangkan mulai dari basis data hingga
               antarmuka.
             </p>
 
-            <div className="hero-actions home-hero-actions">
+            <div className="hero-actions home-hero-actions hero-stagger-4">
               <Button to="/projects">
                 Lihat Proyek
               </Button>
@@ -161,7 +161,7 @@ export default function Home() {
           </div>
 
           <div
-            className="hero-visual home-hero-visual"
+            className="hero-visual home-hero-visual hero-visual-enter"
             aria-hidden="true"
           >
             <div className="code-window home-code-window">
@@ -194,12 +194,12 @@ export default function Home() {
 
 
       {/* =========================
-          TENTANG
-      ========================= */}
-      <section className="section about-preview home-about-preview">
+           TENTANG
+       ========================= */}
+      <Reveal as="section" className="section about-preview home-about-preview" y={22}>
         <div className="container about-preview-inner">
 
-          <div className="home-about-title">
+          <Reveal delay={0} y={16} className="home-about-title">
             <span className="eyebrow">
               Tentang
             </span>
@@ -207,9 +207,9 @@ export default function Home() {
             <h2>
               Berfokus pada detail yang membuat perangkat lunak mudah dirawat.
             </h2>
-          </div>
+          </Reveal>
 
-          <div className="home-about-text">
+          <Reveal delay={120} y={16} className="home-about-text">
 
             <p>
               Saya membangun aplikasi web modern dan skalabel secara menyeluruh
@@ -223,10 +223,10 @@ export default function Home() {
               Selengkapnya tentang saya →
             </Button>
 
-          </div>
+          </Reveal>
 
         </div>
-      </section>
+      </Reveal>
 
 
       {/* =========================
@@ -236,7 +236,7 @@ export default function Home() {
 
         <div className="container">
 
-          <div className="section-head home-skills-head">
+          <Reveal className="section-head home-skills-head">
 
             <div>
               <span className="eyebrow">
@@ -253,7 +253,7 @@ export default function Home() {
               </p>
             </div>
 
-          </div>
+          </Reveal>
 
 
           <div className="grid grid-3 skills-grid home-skills-grid">
@@ -261,8 +261,10 @@ export default function Home() {
             {Object.entries(SKILLS).map(
               ([group, items], groupIndex) => (
 
-                <div
+                <Reveal
                   key={group}
+                  as="div"
+                  delay={groupIndex * 80}
                   className="card skill-card home-skill-card"
                   style={{
                     "--skill-delay": `${groupIndex * 0.08}s`
@@ -310,7 +312,7 @@ export default function Home() {
 
                   </ul>
 
-                </div>
+                </Reveal>
 
               )
             )}
@@ -321,10 +323,9 @@ export default function Home() {
       </section>
 
       {/* =========================
-          ARTIKEL
-      ========================= */}
-      <section className="section home-articles">
-
+           ARTIKEL
+       ========================= */}
+      <Reveal as="section" className="section home-articles">
         <div className="container">
 
           <div className="section-head">
@@ -357,12 +358,13 @@ export default function Home() {
 
             <div className="grid grid-3">
 
-              {featuredArticles.map((article) => (
+              {featuredArticles.map((article, i) => (
 
-                <ArticleCard
-                  key={article.id}
-                  article={article}
-                />
+                <Reveal key={article.id} delay={i * 90} y={20}>
+                  <ArticleCard
+                    article={article}
+                  />
+                </Reveal>
 
               ))}
 
@@ -371,13 +373,13 @@ export default function Home() {
           )}
 
         </div>
-      </section>
+      </Reveal>
 
 
       {/* =========================
-          CONTACT CTA
-      ========================= */}
-      <section className="section contact-cta home-contact">
+           CONTACT CTA
+       ========================= */}
+      <Reveal as="section" className="section contact-cta home-contact">
 
         <div className="container contact-cta-inner">
 
@@ -404,7 +406,7 @@ export default function Home() {
 
         </div>
 
-      </section>
+      </Reveal>
 
     </div>
   );

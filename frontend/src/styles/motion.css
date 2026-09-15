@@ -1,0 +1,257 @@
+/* =========================================================
+   DEPAL — MOTION SYSTEM (Premium Minimal + TikTok Ready)
+   - Only transform + opacity for GPU performance
+   - No heavy blur / glass / neon / canvas
+   - Respects prefers-reduced-motion
+   ========================================================= */
+
+/* --- Page entrance --- */
+.app-shell > main {
+  animation: pageEnter 0.65s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Reveal (IntersectionObserver) --- */
+.reveal {
+  opacity: 0 !important;
+  transform: translateY(var(--reveal-y, 30px)) !important;
+  transition:
+    opacity 0.72s cubic-bezier(0.16,1,0.3,1) var(--reveal-delay, 0ms),
+    transform 0.72s cubic-bezier(0.16,1,0.3,1) var(--reveal-delay, 0ms) !important;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Stagger helper for grids */
+.reveal-stagger > * {
+  --reveal-delay: calc(var(--stagger-index, 0) * 70ms);
+}
+
+/* --- Hero entrance stagger (spec: 0/120/240/360/480) --- */
+.hero-stagger-1 { animation: heroIn 0.7s cubic-bezier(0.16,1,0.3,1) 0ms both; }
+.hero-stagger-2 { animation: heroIn 0.7s cubic-bezier(0.16,1,0.3,1) 120ms both; }
+.hero-stagger-3 { animation: heroIn 0.7s cubic-bezier(0.16,1,0.3,1) 240ms both; }
+.hero-stagger-4 { animation: heroIn 0.7s cubic-bezier(0.16,1,0.3,1) 360ms both; }
+.hero-stagger-5 { animation: heroIn 0.7s cubic-bezier(0.16,1,0.3,1) 480ms both; }
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* Visual pops slightly differently */
+.hero-visual-enter {
+  animation: heroVisualIn 0.85s cubic-bezier(0.16,1,0.3,1) 480ms both;
+}
+@keyframes heroVisualIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hero-visual-enter .code-window {
+  animation: floatSoft 5.5s ease-in-out 1.1s infinite;
+}
+@media (max-width: 767px) {
+  .hero-visual-enter { animation-delay: 360ms; }
+}
+
+/* --- Navbar scroll state --- */
+.navbar {
+  transition:
+    background-color 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    backdrop-filter 0.28s ease;
+}
+.navbar.scrolled {
+  background: rgba(7, 11, 30, 0.88);
+  border-bottom-color: rgba(92,122,255,0.16);
+  box-shadow: 0 8px 32px rgba(4,10,30,0.55), 0 0 18px rgba(58,107,255,0.12);
+}
+.navbar.scrolled .navbar-inner {
+  height: 64px;
+  transition: height 0.28s ease;
+}
+.navbar-inner {
+  transition: height 0.28s ease;
+}
+
+/* --- Button micro --- */
+.btn {
+  will-change: transform;
+}
+.btn:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* --- Scale Reveal variant --- */
+.reveal-scale {
+  opacity: 0 !important;
+  transform: scale(0.94) translateY(20px) !important;
+  transition:
+    opacity 0.72s cubic-bezier(0.16,1,0.3,1) var(--reveal-delay, 0ms),
+    transform 0.72s cubic-bezier(0.16,1,0.3,1) var(--reveal-delay, 0ms) !important;
+  will-change: opacity, transform;
+}
+.reveal-scale.is-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+}
+
+/* --- Stagger enhanced --- */
+.reveal-stagger > * {
+  --reveal-delay: calc(var(--stagger-index, 0) * 80ms);
+}
+.reveal-stagger.stagger-quick > * {
+  --reveal-delay: calc(var(--stagger-index, 0) * 50ms);
+}
+.reveal-stagger.stagger-slow > * {
+  --reveal-delay: calc(var(--stagger-index, 0) * 120ms);
+}
+
+/* --- Button pulse glow for primary --- */
+.btn-primary.pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* --- Certificate shimmer overlay --- */
+.certificate-card {
+  position: relative;
+  overflow: hidden;
+}
+.certificate-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.06),
+    transparent
+  );
+  pointer-events: none;
+  z-index: 2;
+  transition: none;
+}
+.certificate-card:hover::before {
+  animation: shineSweep 0.9s ease forwards;
+}
+
+/* --- Disable conflicting page-load animations when Reveal is used --- */
+/* Projects: Reveal IS the card itself */
+.reveal.project-card {
+  animation: none !important;
+}
+/* Projects: if someone wraps, also disable inner */
+.reveal .project-card {
+  animation: none !important;
+}
+/* Certificates: wrapper reveal contains inner card */
+.reveal .certificate-card {
+  animation: none !important;
+}
+.reveal.certificate-card {
+  animation: none !important;
+}
+.reveal .article-card,
+.reveal.about-skill-tag,
+.reveal.about-focus-card,
+.reveal.about-timeline-item {
+  animation: none !important;
+}
+.reveal.about-skill-tag {
+  display: inline-flex;
+}
+
+/* Ensure page-header when using Reveal doesn't also fadeUp */
+.page-header.reveal {
+  animation: none !important;
+}
+.certificates-intro.reveal {
+  animation: none !important;
+}
+
+/* --- Project / Certificate micro-interactions (scroll + hover) --- */
+.project-card {
+  transition: transform 0.28s cubic-bezier(0.16,1,0.3,1), box-shadow 0.28s ease, border-color 0.28s ease !important;
+}
+.project-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 20px 50px rgba(4,10,30,0.5), 0 0 24px rgba(58,107,255,0.15) !important;
+  border-color: rgba(58,107,255,0.2) !important;
+}
+.project-card:hover .project-image img {
+  transform: scale(1.04) !important;
+  filter: brightness(0.75) !important;
+}
+.project-image img {
+  will-change: transform;
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), filter 0.45s ease !important;
+}
+.certificate-card {
+  transition: transform 0.28s cubic-bezier(0.16,1,0.3,1), box-shadow 0.28s ease, border-color 0.28s ease !important;
+}
+.certificate-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 20px 50px rgba(4,10,30,0.5), 0 0 24px rgba(58,107,255,0.18) !important;
+  border-color: rgba(58,107,255,0.2) !important;
+}
+.certificate-card:hover .certificate-image img {
+  transform: scale(1.04) !important;
+}
+
+/* --- Subtle focus ring premium --- */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Fix certificates grid when Reveal wrapper is the grid item — uniform grid (no featured span) */
+.certificates-grid > .reveal-cert-wrap {
+  min-width: 0;
+  display: flex;
+}
+.certificates-grid > .reveal-cert-wrap .certificate-card {
+  height: 100%;
+  width: 100%;
+}
+
+/* --- Reveal must stay active on mobile (do NOT disable) --- */
+@media (max-width: 767px) {
+  .reveal { --reveal-y: 22px !important; }
+  .app-shell > main { animation-duration: 0.5s; }
+}
+
+/* --- Footer stagger — works alongside Reveal system --- */
+.footer-stagger .footer-brand,
+.footer-stagger .footer-nav,
+.footer-stagger .footer-contact {
+  opacity: 0;
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .app-shell > main,
+  .hero-stagger-1, .hero-stagger-2, .hero-stagger-3,
+  .hero-stagger-4, .hero-stagger-5, .hero-visual-enter,
+  .reveal,
+  .footer-stagger .footer-brand,
+  .footer-stagger .footer-nav,
+  .footer-stagger .footer-contact,
+  .footer-stagger .footer-nav-link,
+  .footer-stagger .footer-bottom-left,
+  .footer-stagger .footer-bottom-right {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
